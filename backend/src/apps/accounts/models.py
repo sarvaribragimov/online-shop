@@ -33,5 +33,9 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-        
+class User(models.Model):
+    username = models.CharField(max_length=200)
+    email = models.EmailField(max_length=45)
+    password = models.IntegerField(max_length=50)
+         
 

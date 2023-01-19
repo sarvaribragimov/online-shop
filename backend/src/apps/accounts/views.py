@@ -30,10 +30,12 @@ def user_login(request):
     return render(request,'account/signin.html',{'form':form})                                             
 # Login ended
 
-
+# register started
 def register(request):
 	if request.method == "POST":
+
 		form = NewUserForm(request.POST)
+        
 		if form.is_valid():
 			user = form.save()
 			login(request, user)
@@ -42,4 +44,4 @@ def register(request):
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm()
 	return render (request=request, template_name="account/register.html", context={"register_form":form})
-	
+# register ended	
