@@ -37,7 +37,7 @@ THIRD_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
+    "crispy_forms"
 ]
 
 LOCAL_APPS = [
@@ -46,8 +46,10 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = THIRD_APPS + LOCAL_APPS
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AUTH_USER_MODEL = "accounts.User"
+
+AUTH_USER_MODEL = "accounts.Account"
 
 
 MIDDLEWARE = [
