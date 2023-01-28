@@ -32,7 +32,7 @@
 <!-- custom javascript -->
 <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
 
-<script type="text/javascript">
+<script type="{% static 'text/javascript' %}">
 /// some script
 
 // jquery ready start
@@ -56,9 +56,6 @@ $(document).ready(function() {
     {% endblock content %}
 
     {% include 'includes/fotter.html' %}
-
-
-
 
 
 </body>

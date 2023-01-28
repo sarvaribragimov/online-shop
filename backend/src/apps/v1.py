@@ -11,4 +11,14 @@ urlpatterns = [
             namespace="accounts",
         ),
     ),
+    path(
+        "",
+        include(
+            (
+                "src.apps.store.urls",
+                "src.apps.store.urls",
+            ),
+            namespace="store",
+        ),
+    ),
 ]

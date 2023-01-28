@@ -1,5 +1,3 @@
-{% load static %}
-
 <header class="section-header">
     <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
         <div class="container">
@@ -30,7 +28,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2 col-md-3 col-6">
                     <a href="./" class="brand-wrap">
-                        <img class="logo" src="{% static './images/logo.png' %}">
+                        <img class="logo" src="images/logo.png">
                     </a> <!-- brand-wrap.// -->
                 </div>
                 <div class="col-lg col-sm col-md col-6 flex-grow-0">
@@ -39,16 +37,13 @@
                             <i class="fa fa-bars"></i> All category
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Machinery / Mechanical Parts / Tools </a>
-                            <a class="dropdown-item" href="#">Consumer Electronics / Home Appliances </a>
-                            <a class="dropdown-item" href="#">Auto / Transportation</a>
-                            <a class="dropdown-item" href="#">Apparel / Textiles / Timepieces </a>
-                            <a class="dropdown-item" href="#">Home & Garden / Construction / Lights </a>
-                            <a class="dropdown-item" href="#">Beauty & Personal Care / Health </a>
+                            {% for category in categories %}
+                            <a class="dropdown-item" href="{{ category }}">{{ category.name }}</a>
+                            {% endfor %}
                         </div>
                     </div> <!-- category-wrap.// -->
                 </div> <!-- col.// -->
-                <a href="./store.html" class="btn btn-outline-primary">Store</a>
+                <a href="{% url 'store:product_list_view' %}" class="btn btn-outline-primary">Do'kon</a>
                 <div class="col-lg  col-md-6 col-sm-12 col">
                     <form action="#" class="search">
                         <div class="input-group w-100">
@@ -67,8 +62,8 @@
                         <div class="widget-header">
                             <small class="title text-muted">Welcome guest!</small>
                             <div>
-                                <a href="login/">Sign in</a> <span class="dark-transp"> | </span>
-                                <a href="register/"> Register</a>
+                                <a href="{% url 'accounts:login' %}">Sign in</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'accounts:register' %}"> Register</a>
                             </div>
                         </div>
                         <a href="./cart.html" class="widget-header pl-3 ml-3">

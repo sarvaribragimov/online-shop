@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
+
+import logging.config
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ SECRET_KEY = "django-insecure-ithz@*q#q7z*h1x#0)ia5hc9km1*t1p^lrvffnzr3k8z-knvpl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,20 +38,18 @@ THIRD_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "crispy_forms"
 ]
 
 LOCAL_APPS = [
     "src.apps.accounts",
+    "src.apps.common",
+    "src.apps.store",
 ]
 
 INSTALLED_APPS = THIRD_APPS + LOCAL_APPS
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-
-# AUTH_USER_MODEL = "accounts.Account"
-
+AUTH_USER_MODEL = "accounts.Account"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -75,6 +74,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "src.apps.store.category_processors.all_categories",
             ],
         },
     },
@@ -130,23 +130,44 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-# static files
 STATIC_URL = "/static/"
-# STATIC_ROOT = BASE_DIR / "static"
-# STATICFILES_DIRS = [
-    # "config/static",
-# ]
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static')
-]
-
-# media config
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
-
-
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Email configuration
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "sarvaribragimov990@gmail.com"
+EMAIL_HOST_PASSWORD = "ubwjkabtqiiorqsh"
+EMAIL_USE_TLS = True
+
+
+# log file
+logging.config.dictConfig(
+    {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {
+            "file": {"format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s"},
+        },
+        "handlers": {
+            "file": {
+                "level": "ERROR",
+                "class": "logging.FileHandler",
+                "formatter": "file",
+                "filename": "errors.log",
+            },
+        },
+        "loggers": {
+            "": {"level": "ERROR", "handlers": ["file"]},
+            "django.request": {"level": "INFO", "handlers": ["file"]},
+        },
+    }
+)
