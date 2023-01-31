@@ -19,6 +19,7 @@ class Product(BaseModel):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to=path_and_rename)
     stock = models.PositiveIntegerField()
+    # available = models.BooleanField(default=True)
     is_available = models.BooleanField(default=True, help_text="Is product available?")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
