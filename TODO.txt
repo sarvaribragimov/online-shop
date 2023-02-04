@@ -1,0 +1,8 @@
+# 17 Yanvar 2023
+
+# 1) Email Register -> activate link -> Login
+
+Model (is_active) -> View(activate_link) -> Url(uuid) -> Template(login.html/Register)
+
+
+/activate/uuid/
