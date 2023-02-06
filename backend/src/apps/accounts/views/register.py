@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
 from django.db import transaction
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
@@ -9,6 +8,8 @@ from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode
 
 from ..forms.register_form import RegistrationForm
+from ...common.send_mail import send_email_async
+import asyncio
 
 
 @transaction.atomic
@@ -27,9 +28,8 @@ def register(request):
                     new_form.username = username
                     new_form.set_password(password)
                     new_form.save()
-                    # send email to user
                     firstname = form.cleaned_data.get("firstname")
-
+                    # Email data
                     current_site = get_current_site(request)
                     domain = f"http://{current_site.domain}/activate/{urlsafe_base64_encode(force_bytes(new_form))}/"
                     subject = "Welcome to the site"
@@ -43,12 +43,7 @@ def register(request):
                         },
                     )
                     html_body = strip_tags(body)
-                    sendmail = EmailMessage(
-                        subject=subject,
-                        body=html_body,
-                        to=[email],
-                    )
-                    sendmail.send()
+                    asyncio.run(send_email_async(subject, html_body, [email]))
 
                 messages.success(request, f"Account created for {username}!")
                 return redirect("accounts:login")

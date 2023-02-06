@@ -1,0 +1,13 @@
+- id: '1'
+  name: 'mahsulot 1'
+  description: 'mahsulot 1 haqida'
+  price: 1000
+  stock: 100
+  is_available: true
+- id: '2'
+  name: 'mahsulot 2'
+  description: 'mahsulot 2 haqida'
+  price: 1000
+  stock: 100
+  is_available: true
+  category_id: '1'

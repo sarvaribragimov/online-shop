@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Account
+from .models import Account, UserProfile
 
 
 class AccountUserAdmin(UserAdmin):
@@ -39,10 +39,10 @@ class AccountUserAdmin(UserAdmin):
 admin.site.register(Account, AccountUserAdmin)
 
 
-# class UserProfileAdmin(admin.ModelAdmin):
-#     list_display = ("user", "city", "state", "address")
-#     list_filter = ("city", "state")
-#     list_display_links = ("user", "city", "state", "address")
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ("user", "city", "state", "address")
+    list_filter = ("city", "state")
+    list_display_links = ("user", "city", "state", "address")
 
 
-# admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)

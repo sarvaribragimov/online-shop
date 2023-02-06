@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 # Create your models here.
+from django.db.models import Avg
 from ...common.models import BaseModel
 from ...common.file_renamer import PathAndRename
 from django.utils.text import slugify
@@ -18,7 +19,7 @@ class Product(BaseModel):
     description = models.TextField(max_length=1000, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to=path_and_rename)
-    stock = models.PositiveIntegerField()
+    stock = models.PositiveIntegerField(blank=False)
     # available = models.BooleanField(default=True)
     is_available = models.BooleanField(default=True, help_text="Is product available?")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -33,6 +34,10 @@ class Product(BaseModel):
 
     def __str__(self):
         return self.name
+    @property
+    def average_rating(self):
+        reviews = self.reviews.filter(status=True).aggregate(Avg("rating"))
+        return float(reviews["rating__avg"]) if reviews["rating__avg"] else 0    
 
     def save(self):
         self.slug = slugify(self.name)

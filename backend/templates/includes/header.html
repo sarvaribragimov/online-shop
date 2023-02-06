@@ -45,10 +45,9 @@
                 </div> <!-- col.// -->
                 <a href="{% url 'store:product_list' %}" class="btn btn-outline-primary">Do'kon</a>
                 <div class="col-lg  col-md-6 col-sm-12 col">
-                    <form action="#" class="search">
+                    <form method="get" action="{% url 'store:search' %}" class="search">
                         <div class="input-group w-100">
-                            <input type="text" class="form-control" style="width:60%;" placeholder="Search">
-
+                            <input type="text" class="form-control" name="q" style="width:60%;" placeholder="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fa fa-search"></i>
