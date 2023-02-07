@@ -45,12 +45,14 @@ LOCAL_APPS = [
     "src.apps.accounts",
     "src.apps.common",
     "src.apps.store",
+    "src.apps.cart",
 ]
 
 INSTALLED_APPS = THIRD_APPS + LOCAL_APPS
 
 
 AUTH_USER_MODEL = "accounts.Account"
+CART_SESSION_ID = 'cart'
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -145,8 +147,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Email configuration
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "sarvaribragimov990@gmail.com"
-EMAIL_HOST_PASSWORD = "ubwjkabtqiiorqsh"
+EMAIL_HOST_USER = "fayzulloh00010003@gmail.com"
+EMAIL_HOST_PASSWORD = "yauwzixxyhcylioi"
 EMAIL_USE_TLS = True
 
 

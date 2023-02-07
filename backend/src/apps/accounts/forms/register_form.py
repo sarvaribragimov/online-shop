@@ -2,7 +2,7 @@ from django import forms
 
 from ..models import Account
 
-# UserCreationForm is a built-in form in Django
+
 class RegistrationForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput(

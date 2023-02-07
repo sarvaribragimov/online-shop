@@ -12,13 +12,23 @@ urlpatterns = [
         ),
     ),
     path(
-        "",
+        "store/",
         include(
             (
                 "src.apps.store.urls",
                 "src.apps.store.urls",
             ),
             namespace="store",
+        ),
+    ),
+    path(
+        "cart/",
+        include(
+            (
+                "src.apps.cart.urls",
+                "src.apps.cart.urls",
+            ),
+            namespace="cart",
         ),
     ),
 ]

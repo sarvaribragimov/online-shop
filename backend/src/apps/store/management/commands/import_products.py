@@ -13,7 +13,6 @@ class Command(BaseCommand):
                 "Import products... wait...",
             )
         )
-        Product.objects.all().delete()
         try:
             with open(
                 "src/apps/common/fixtures/products.yaml",

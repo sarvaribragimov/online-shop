@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 from .manager import AccoutManager
 from django.contrib.auth.models import PermissionsMixin
+from django.utils.translation import gettext_lazy as _
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
@@ -38,8 +39,6 @@ class Account(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "Accounts"
 
 
-# TODO Account Profile
-
 class UserProfile(models.Model):
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to="profile_pics", default="profile_pics/default.png", blank=True, null=True)
@@ -55,7 +54,6 @@ class UserProfile(models.Model):
         return f"{self.city} {self.state}"
 
     class Meta:
-        verbose_name = ("UserProfile")
-        verbose_name_plural = ("UserProfile")
+        verbose_name = _("UserProfile")
+        verbose_name_plural = _("UserProfile")
         ordering = ["-id"]
-

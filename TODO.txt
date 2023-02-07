@@ -4,5 +4,48 @@
 
 Model (is_active) -> View(activate_link) -> Url(uuid) -> Template(login.html/Register)
 
+# 2) Email Register -> activate link -> Login
+Model (is_active) -> View(activate_link) -> Url(uuid) -> Template(login.html/Register)
 
-/activate/uuid/
+
+
+# 3) Store Product -> Add to Cart -> Checkout -> Payment -> Order
+
+MVT = Model View Template (url)
+
+
+# 4) Store Product detail:
+
+Reviews {
+    desc: RichTextField,
+    user: ForeignKey(Account),
+    product: ForeignKey(Product),
+    status: BooleanField(default=False),
+    created_at: DateTimeField(auto_now_add=True),
+    updated_at: DateTimeField(auto_now=True),
+    ip: GenericIPAddressField(),
+    rating: IntegerField(default=0),
+    # reply: ForeignKey(Review, null=True, blank=True),
+}
+
+Product Image {
+    product: ForeignKey(Product),
+    image: ImageField(upload_to='product_images'),
+    created_at: DateTimeField(auto_now_add=True),
+    updated_at: DateTimeField(auto_now=True),
+}
+
+
+varina_category = (
+    ('color', 'color') 
+    ('size', 'size') 
+)
+
+Variation {
+    product: ForeignKey(Product),
+    categoy_name: CharField(max_length=100, choices=varina_category),
+    varaint_value: CharField(max_length=100),
+    #is_active: BooleanField(default=True),
+    created_at: DateTimeField(auto_now_add=True),
+    updated_at: DateTimeField(auto_now=True),
+}

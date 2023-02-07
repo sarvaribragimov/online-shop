@@ -8,7 +8,7 @@ from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode
 
 from ..forms.register_form import RegistrationForm
-from ...common.send_mail import send_email_async
+from ...common.send_email import send_email_async
 import asyncio
 
 
