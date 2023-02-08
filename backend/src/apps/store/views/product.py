@@ -7,6 +7,7 @@ from django.shortcuts import render
 from ..models.category import Category
 from ..models.product import Product
 from ...accounts.models import Account
+from ...cart.forms import CartAddproductForm
 
 # import logging
 
@@ -43,7 +44,9 @@ def product_detail_view(request, category_slug, product_slug):
     product = Product.objects.get(category__slug=category_slug, slug=product_slug)
     product_reviews = product.reviews.filter(status=True)
     product_images = product.images.all()
+    cart_product_form = CartAddproductForm()
     context = {
+        "cart_product_form":cart_product_form,
         "product": product,
         "product_reviews": product_reviews,
         "product_images": product_images,

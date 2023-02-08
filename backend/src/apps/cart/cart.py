@@ -22,7 +22,6 @@ class Cart(object):
             self.cart[product_id]['quantity'] += quantity
         self.save()
     def save(self):
-        # mark the session as "modified" to make sure it gets saved
         self.session.modified = True   
 
     def remove(self,product):
@@ -33,7 +32,6 @@ class Cart(object):
 
     def __iter__(self):
         product_ids = self.cart.keys()
-        # get the product objects and add them to the cart
         products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
         for product in products:

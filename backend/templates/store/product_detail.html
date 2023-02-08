@@ -110,17 +110,25 @@ Home
             </div>
         </div> <!-- row.// -->
         <hr>
+        
+          
+          
+        
 
           #TODO 
+      <form method="post"> 
+        {{ cart_product_form }}
+        {% csrf_token %}  
         {% if user.is_authenticated %}
           {% if product.stock > 0 %}
-          <a href="#" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+          <a href="{% url "cart:cart_add" product.id %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
           {% else %}
           <a href="#" class="btn  btn-primary disabled"> <span class="text">Out of Stock</span> <i class="fas fa-shopping-cart"></i>  </a>
         {% endif %}
         {% else %}
           <a href="{% url 'accounts:login' %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
         {% endif %}
+      </form>
 
     </article> <!-- product-info-aside .// -->
             </main> <!-- col.// -->
