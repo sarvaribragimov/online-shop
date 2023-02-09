@@ -6,6 +6,7 @@ from .models.product import Product
 from .models.category import Category
 from .models.review import Review
 from .models.product import ProductImage
+from .models.variants import ProductVariants
 
 
 class ReviewAdmin(admin.ModelAdmin):
@@ -24,3 +25,4 @@ admin.site.register(Review, ReviewAdmin)
 # TODO - configure admin
 admin.site.register(Product)
 admin.site.register(Category)
+admin.site.register(ProductVariants)

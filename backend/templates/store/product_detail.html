@@ -75,18 +75,15 @@ Home
             <div class="item-option-select">
                 <h6>Choose Color</h6>
                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> Silver
+                  
+                   
+                  
+                  {% for color in product.variants.colors %}
+                  <label class="btn btn-light"> 
+                    <input type="radio" name="radio_color">{{ color.variant_value }}
                   </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color" > Gray
-                  </label>
-                  <label class="btn btn-light active">
-                    <input type="radio" name="radio_color checked"> Gold
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> Black
-                  </label>
+                  {% endfor %} 
+                  
                 </div> 
             </div>
         </div> <!-- row.// -->
@@ -94,18 +91,13 @@ Home
             <div class="item-option-select">
                 <h6>Select Size</h6>
                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+
+                  {% for size in product.variants.sizes %}
                   <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> S
+                    <input type="radio" name="radio_color">{{ size.variant_value }}
                   </label>
-                  <label class="btn btn-light active">
-                    <input type="radio" name="radio_color" checked> M
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> L
-                  </label>
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color"> XL
-                  </label>
+                  {% endfor %}
+                    
                 </div> 
             </div>
         </div> <!-- row.// -->
@@ -144,6 +136,7 @@ Home
           <form method="POST" action="{% url 'store:add_review' product.id %}">
             {% csrf_token %}
             <h5>Wrire your review</h5>
+            
             <div>
               <label>
                 How do you rate this product?
@@ -174,6 +167,13 @@ Home
             </div>
               <br>
                 Write comment:
+                {% if messages %}
+                  {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                      <b>{{ message }}</b>
+                    </div>
+                  {% endfor %}
+                {% endif %}                                                             
               <textarea name="desc" class="form-control" rows="5" cols="40"></textarea>
               <br>
             </div>

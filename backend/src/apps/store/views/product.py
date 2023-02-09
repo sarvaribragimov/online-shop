@@ -8,7 +8,7 @@ from ..models.category import Category
 from ..models.product import Product
 from ...accounts.models import Account
 from ...cart.forms import CartAddproductForm
-
+from ..models.variants import ProductVariants
 # import logging
 
 
@@ -29,7 +29,7 @@ def product_list_view(request, category_slug=None):
 
         product_count = products.count()
         page = request.GET.get("page")
-        paginator = Paginator(products, 1)
+        paginator = Paginator(products, 2)
         products = paginator.get_page(page)
 
         return render(request, "store/store.html", {"products": products, "product_count": product_count})
@@ -44,6 +44,8 @@ def product_detail_view(request, category_slug, product_slug):
     product = Product.objects.get(category__slug=category_slug, slug=product_slug)
     product_reviews = product.reviews.filter(status=True)
     product_images = product.images.all()
+    # variants = ProductVariants.objects.colors().filter(product=product)
+    # print(variants)
     cart_product_form = CartAddproductForm()
     context = {
         "cart_product_form":cart_product_form,
