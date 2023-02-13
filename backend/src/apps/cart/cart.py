@@ -23,7 +23,7 @@ class Cart(object):
             self.cart[product_id]['quantity'] += quantity
         self.save()
     def save(self):
-        self.session.modified = True   
+        self.session.modified = True    
 
     def remove(self,product):
         product_id = str(product_id)
