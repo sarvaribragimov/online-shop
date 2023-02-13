@@ -9,9 +9,10 @@ class Cart(object):
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
             cart = self.session[settings.CART_SESSION_ID] = {}
+            print(cart)
         self.cart = cart
-
-    def add(self,product,quantity=1,override_quantity=False):
+    
+    def add_to_cart(self,product,quantity=1,override_quantity=False):
         product_id = str(product.id)
         if product_id not in self.cart:
             self.cart[product_id] = {'quantity': 0,

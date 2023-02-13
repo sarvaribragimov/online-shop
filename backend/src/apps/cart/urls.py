@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import cart_add,cart_detail,cart_remove
+
+from .views import cart, cart_add,add_cart
 
 urlpatterns = [
-    path('',cart_detail,name="cart_detail"),
-    path('cart/add/<int:product_id>/',cart_add,name="cart_add"),
-    path('remove/<int:product_id>/',cart_remove,name="cart_remove"),
+    path("", cart, name="cart"),
+    path('add/<int:product_id>/',cart_add, name='cart_add'),
+    path("add/cart", add_cart, name="add_cart"),
 ]

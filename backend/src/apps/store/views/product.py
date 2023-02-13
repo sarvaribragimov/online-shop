@@ -46,6 +46,10 @@ def product_detail_view(request, category_slug, product_slug):
     product_images = product.images.all()
     # variants = ProductVariants.objects.colors().filter(product=product)
     # print(variants)
+    # sess = request.session.session_key
+    # if sess is None:
+    #     request.session.create()
+    # print(request.session.session_key)    
     cart_product_form = CartAddproductForm()
     context = {
         "cart_product_form":cart_product_form,

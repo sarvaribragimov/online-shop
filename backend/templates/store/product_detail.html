@@ -71,18 +71,23 @@ Home
     </p>    
     
     <hr>
+
+
+   
+    <form action="{% url "cart:cart_add" product.id %}" method="post">
+      {{ cart_product_form }}
+      {% csrf_token %}
         <div class="row">
+            <input type="hidden" name="product_id" value="{{ product.id }}">
             <div class="item-option-select">
                 <h6>Choose Color</h6>
                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                  
-                   
-                  
-                  {% for color in product.variants.colors %}
-                  <label class="btn btn-light"> 
-                    <input type="radio" name="radio_color">{{ color.variant_value }}
-                  </label>
-                  {% endfor %} 
+                  <select name="color" id="" class="form-control" required>
+                    <option  disabled selected>Select Color</option>
+                    {% for color in product.variants.colors %}
+                      <option value="{{ color.variant_value }}">{{ color.variant_value }}</option>
+                    {% endfor %}
+                  </select>
                   
                 </div> 
             </div>
@@ -91,35 +96,29 @@ Home
             <div class="item-option-select">
                 <h6>Select Size</h6>
                 <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-
-                  {% for size in product.variants.sizes %}
-                  <label class="btn btn-light">
-                    <input type="radio" name="radio_color">{{ size.variant_value }}
-                  </label>
-                  {% endfor %}
-                    
+                  <select name="size" id="" class="form-control" required>
+                    <option value="" disabled selected>Select Size</option>
+                    {% for size in product.variants.sizes %}
+                      <option value="{{ size.variant_value }}">{{ size.variant_value }}</option>
+                    {% endfor %}
+                  </select>
+                  
                 </div> 
             </div>
         </div> <!-- row.// -->
+        
         <hr>
         
-          
-          
-        
-
-          #TODO 
-      <form method="post"> 
-        {{ cart_product_form }}
-        {% csrf_token %}  
         {% if user.is_authenticated %}
-          {% if product.stock > 0 %}
-          <a href="{% url "cart:cart_add" product.id %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
-          {% else %}
+        {% if product.stock > 0 %}
+        <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
+        {% else %}
           <a href="#" class="btn  btn-primary disabled"> <span class="text">Out of Stock</span> <i class="fas fa-shopping-cart"></i>  </a>
         {% endif %}
         {% else %}
-          <a href="{% url 'accounts:login' %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
+        <a href="{% url 'accounts:login' %}" class="btn  btn-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </a>
         {% endif %}
+        
       </form>
 
     </article> <!-- product-info-aside .// -->
