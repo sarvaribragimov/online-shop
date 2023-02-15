@@ -7,9 +7,8 @@ from decimal import Decimal
 from .forms import CartAddproductForm
 from ..store.models.product import Product
 from .cart import Cart
-
-
-
+from django.views.decorators.http import require_POST
+@require_POST
 def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -19,10 +18,9 @@ def cart_add(request, product_id):
         cd = form.cleaned_data
         print(f" cleaned date  e ={cd}")
         cart.add_to_cart(product=product,
-        quantity=cd['quantity'],
-        override_quantity=cd['override'])
+        quantity=cd['quantity'],)
     return redirect('cart:cart_detail')
-
+ 
 def add_cart(request):
     """
     #TODO add to cart
@@ -55,34 +53,20 @@ def add_cart(request):
     return redirect("cart:cart")
 
 
-def cart(request):
-    cart = Cartmodel.objects.get(user=request.user)
-    cart_items = CartItem.objects.filter(cart=cart, status=StatusChoices.ACTIVE)
-    total_price = cart_items.aggregate(
-        total_price=Sum(
-            F("product__price") * F("quantity"), output_field=models.DecimalField(max_digits=10, decimal_places=2)
-        )
-    )["total_price"]
-    delevery = Decimal(total_price * Decimal(0.1)).quantize(Decimal("0.01"))  # 10% of total price
-    grand_total = total_price + delevery
-
-    context = {"cart_items": cart_items, "total_price": total_price, "delevery": delevery, "grand_total": grand_total}
-    return render(request, "cart/cart_items.html", context)
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.dele(product)
+    return redirect('cart:cart_detail')
 
 
 # def cart_detail(request):
 #     cart = Cart(request)
-#     for item in cart:
-#         item['update_quantity_form'] = CartAddproductForm(initial={
-#                 'quantity': item['quantity'],
-#                 'override': True})
-#     return render(request, 'cart/detail.html', {'cart': cart})
-def cart_remove(request, product_id):
-    cart = Cart(request)
-    product = get_object_or_404(Product, id=product_id)
-    cart.remove(product)
-    return redirect('cart:cart_detail')
+#     return render(request, 'cart/cart_items.html', {'cart': cart})
 
 def cart_detail(request):
     cart = Cart(request)
-    return render(request, 'cart/cart_items.html', {'cart': cart})
+    for item in cart:
+        item['update_quantity_form'] = CartAddproductForm(initial={'quantity': item['quantity'],
+                                                                   'update': True})
+    return render(request, 'cart/cart_items.html', {'cart': cart})    

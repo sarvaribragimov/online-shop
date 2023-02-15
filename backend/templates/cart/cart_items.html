@@ -58,12 +58,24 @@ cart
 				</td>
 				<td> 
 					<div class="price-wrap"> 
-						<var class="price">{{ item.quantity }}</var> 
-						<small class="text-muted">{{ item.total_price }}</small> 
+						<var class="price">{{ item.quantity|intcomma }}</var> 
+						<small class="text-muted">{{ item.total_price|intcomma }}</small> 
 					</div> <!-- price-wrap .// -->
 				</td>
+				<td>
+					<form action="{% url "cart:cart_add"  product.id %}" method="post">
+					{{ item.update_quantity_form.quantity }}
+					{{ item.update_quantity_form.override }}
+					<input type="submit" value="Update">
+					{% csrf_token %}
+					</form>
+					</td>
+				
 				<td class="text-right"> 
-					<a href="" class="btn btn-danger"> Remove</a>
+					<form action="" method="post">
+						<input type="submit" value="Remove" />
+						{% csrf_token %}
+					  </form>
 				</td>
 			</tr>
 		{% endwith %}
