@@ -28,14 +28,15 @@ cart
 	<tbody>
 	
 
-	{% for item  in cart %}	
-		{% with product=item.product %}
+	{% for item  in cart_items %}	
+		
 
 			<tr>
 				<td>
 					
 					<figure class="itemside align-items-center">
-						<div class="aside"><img src="" class="img-sm"></div>
+						<a href="{{ product.get_absolute_url }}">
+						<div class="aside"><img src="{{ item.product.image.url }}" class="img-sm"></div>
 						<figcaption class="info">
 							<a href="{{ product.get_absolute_url }}" class="title text-dark">{{ item.product.name }}</a>
 							<p class="small text-muted">{{ item.product.description }}</p>
@@ -47,38 +48,32 @@ cart
 								<div class="col"> 
 									<div class="input-group input-spinner">
 										<div class="input-group-prepend">
-										<button class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </button>
+										<a class="btn btn-light" href="{% url 'cart:remove_cart_item' item.id %}" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
 										</div>
-										<input type="text" class="form-control"  value="1">
+										
+										<input type="text" class="form-control"  value="{{ item.quantity }}">
+										
 										<div class="input-group-append">
-										<button class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </button>
+										<a class="btn btn-light" href="{% url 'cart:ad_to_cart' item.id %}" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
 										</div>
+										
 									</div> <!-- input-group.// -->
 								</div> <!-- col.// -->
 				</td>
 				<td> 
 					<div class="price-wrap"> 
-						<var class="price">{{ item.quantity|intcomma }}</var> 
-						<small class="text-muted">{{ item.total_price|intcomma }}</small> 
+						<var class="price">{{ item.product.price|intcomma }}</var> 
+						<small class="text-muted">{{ item.product.price|intcomma }}</small> 
 					</div> <!-- price-wrap .// -->
 				</td>
-				<td>
-					<form action="{% url "cart:cart_add"  product.id %}" method="post">
-					{{ item.update_quantity_form.quantity }}
-					{{ item.update_quantity_form.override }}
-					<input type="submit" value="Update">
-					{% csrf_token %}
-					</form>
-					</td>
+			</td>
+			<td class="text-right">
+				<a href="{% url 'cart:delete_cart' item.id  %}" class="btn btn-danger"> Remove</a>
+			</td>
 				
-				<td class="text-right"> 
-					<form action="" method="post">
-						<input type="submit" value="Remove" />
-						{% csrf_token %}
-					  </form>
-				</td>
+				
 			</tr>
-		{% endwith %}
+		
 	{% endfor %}
 	</tbody>
 	</table>
@@ -94,7 +89,7 @@ cart
 				  <dd class="text-right">{{total_price|intcomma}}</dd>
 				</dl>
 				<dl class="dlist-align">
-				  <dt>Tax:</dt>
+				  <dt>Taxi:</dt>
 				  <dd class="text-right"> {{delevery|intcomma}}</dd>
 				</dl>
 				<dl class="dlist-align">

@@ -1,13 +1,15 @@
 from base64 import urlsafe_b64decode
 from django.urls import path
 
-from .views import cart_add,add_cart,cart_detail,cart_remove
+from .views import add_cart,cart ,delete_cart, add_to_cart,remove_cart_item
 
 urlpatterns = [
-    path('', cart_detail, name='cart_detail'),
+    
+    path("", cart, name="cart"),
+    path('add/cart', add_cart, name="add_cart"),
+    path("delete/<int:cart_item_id>", delete_cart, name="delete_cart"),
+    path("remove/<int:cart_item_id>", remove_cart_item, name="remove_cart_item"),
+    path('add/<int:cart_item_id>',add_to_cart,name="ad_to_cart"),
+
    
-    path('add/<int:product_id>/',cart_add, name='cart_add'),
-    path("add/cart", add_cart, name="add_cart"),
-    path("cart/remove/<int:product_id>/", cart_remove,name='cart_remove'),
-    # path(r'^remove/(?P<product_id>\d+)/$', cart_remove, name='cart_remove'),
 ]

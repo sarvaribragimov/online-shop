@@ -144,7 +144,7 @@ Home
             <figure class="card card-product-grid">
                 <div class="img-wrap"> 
                     
-                    <img src="{{ product.get_image_url }}">
+                    <img  src="{{ product.get_image_url }}">
 
                     
                 </div> <!-- img-wrap.// -->
@@ -156,7 +156,7 @@ Home
                             <del class="price-old">${{ product.price }}</del>
                         </div> <!-- price-wrap.// -->
                     </div>
-                    <a href="#" class="btn btn-block btn-success">Added to cart </a>
+                    <a href="{{ product.get_absolute_url }}" class="btn btn-block btn-success">View to cart </a>
                 </figcaption>
             </figure>
         </div> <!-- col.// -->

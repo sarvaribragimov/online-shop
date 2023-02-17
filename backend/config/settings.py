@@ -52,7 +52,7 @@ INSTALLED_APPS = THIRD_APPS + LOCAL_APPS
 
 
 AUTH_USER_MODEL = "accounts.Account"
-CART_SESSION_ID = 'cart'
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

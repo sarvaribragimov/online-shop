@@ -11,7 +11,9 @@ User = get_user_model()
 
 
 class Cartmodel(BaseModel):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cart")
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cart", blank=True, null=True)
+    cart_id_pk = models.CharField(max_length=255, blank=True, null=True, unique=True)  # session key
 
     class Meta:
         ordering = ("-created_at",)
@@ -30,7 +32,7 @@ class StatusChoices(models.TextChoices):
 
 # Product item in cart
 class CartItem(BaseModel):
-    cart = models.ForeignKey(Cartmodel, on_delete=models.CASCADE, related_name="items")
+    cart = models.ForeignKey(Cartmodel, on_delete=models.CASCADE, null=True, related_name="items")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="cart_items")
     variations = models.ManyToManyField(ProductVariants, blank=True)
     quantity = models.PositiveIntegerField(default=1)
