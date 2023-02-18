@@ -46,6 +46,7 @@ LOCAL_APPS = [
     "src.apps.common",
     "src.apps.store",
     "src.apps.cart",
+    "src.apps.order",
 ]
 
 INSTALLED_APPS = THIRD_APPS + LOCAL_APPS
@@ -78,6 +79,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "src.apps.store.category_processors.all_categories",
+                "src.apps.cart.item_counter.counter",
             ],
         },
     },

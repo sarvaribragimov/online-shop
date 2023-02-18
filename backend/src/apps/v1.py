@@ -31,4 +31,14 @@ urlpatterns = [
             namespace="cart",
         ),
     ),
+     path(
+        "order/",
+        include(
+            (
+                "src.apps.order.urls",
+                "src.apps.order.urls",
+            ),
+            namespace="order",
+        ),
+    ),
 ]

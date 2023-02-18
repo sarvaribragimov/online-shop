@@ -4,11 +4,10 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render
 
+from ...common.alerter import tg_alert
 from ..models.category import Category
 from ..models.product import Product
-from ...accounts.models import Account
-from ...cart.forms import CartAddproductForm
-from ..models.variants import ProductVariants
+
 # import logging
 
 
@@ -35,6 +34,8 @@ def product_list_view(request, category_slug=None):
         return render(request, "store/store.html", {"products": products, "product_count": product_count})
     except Exception as e:
         logger.error(e)
+        tg_alert.custom_alert(f"Error in product_list_view: {e}")
+        print(e)
         return render(request, "store/store.html", {"products": None, "product_count": 0})
 
 
@@ -44,20 +45,13 @@ def product_detail_view(request, category_slug, product_slug):
     product = Product.objects.get(category__slug=category_slug, slug=product_slug)
     product_reviews = product.reviews.filter(status=True)
     product_images = product.images.all()
-    # variants = ProductVariants.objects.colors().filter(product=product)
-    # print(variants)
-    # sess = request.session.session_key
-    # if sess is None:
-    #     request.session.create()
-    # print(request.session.session_key)    
-    cart_product_form = CartAddproductForm()
     context = {
-        "cart_product_form":cart_product_form,
         "product": product,
         "product_reviews": product_reviews,
         "product_images": product_images,
     }
     return render(request, "store/product_detail.html", context)
+
 
 
 def search(request):

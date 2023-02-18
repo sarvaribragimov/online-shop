@@ -8,6 +8,21 @@ from ..store.models.product import Product
 from ..store.models.variants import ProductVariants
 from .models import CartItem, Cartmodel, StatusChoices
 
+from django.shortcuts import render, redirect, get_object_or_404
+# from django.views.decorators.http import require_POST
+# from .cart import Cart
+# from .forms import CartAddProductForm
+# @require_POST
+# def cart_add(request, product_id):
+#     cart = Cart(request)
+#     product = get_object_or_404(Product, id=product_id)
+#     form = CartAddProductForm(request.POST)
+#     if form.is_valid():
+#         cd = form.cleaned_data
+#         cart.add(product=product,
+#         quantity=cd['quantity'],
+#         override_quantity=cd['override'])
+#     return redirect('cart:cart_detail')
 
 def add_cart(request):
     # get product variations
@@ -60,13 +75,14 @@ def cart(request):
     return render(request, "cart/cart_items.html", context)
 
 def delete_cart(request, cart_item_id):
-    cart_item = CartItem.objects.get(id=cart_item_id)
+    cart_item = get_object_or_404(CartItem,id=cart_item_id)
     cart_item.delete()
     return redirect('cart:cart')
 
 def remove_cart_item(request, cart_item_id):
     try:
         # TODO use get_object_or_404
+        cart_item = get_object_or_404(CartItem,id=cart_item_id)
         cart_item = CartItem.objects.get(id=cart_item_id)
         if cart_item.quantity > 1:
             cart_item.quantity -= 1

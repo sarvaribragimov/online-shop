@@ -70,7 +70,12 @@ cart
 			<td class="text-right">
 				<a href="{% url 'cart:delete_cart' item.id  %}" class="btn btn-danger"> Remove</a>
 			</td>
-				
+				{% empty %}
+					<tr>
+						<td colspan='4'>
+							<h3 class="text-center"> No items in cart</h3>	
+						</td>
+					</tr>	
 				
 			</tr>
 		

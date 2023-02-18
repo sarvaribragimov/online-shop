@@ -1,10 +1,17 @@
-from .models import Cartmodel, CartItem
+from .models import CartItem,Cartmodel
+from ..common.get_cart_id import _card_id
 
 
 def counter(request):
-    # TODO cache
-    cart, created = Cartmodel.objects.get_or_create(user=request.user)
-    cart_items = CartItem.objects.filter(cart=cart)
-    counter = cart_items.count()
-    # TODO user  Sum aggregation
-    return {"counter": counter}
+    try:
+        if request.path.startswith("/admin"):
+            return {}
+        if request.user.is_authenticated:
+            cart = Cartmodel.objects.get(user=request.user)
+        else:
+            cart = Cartmodel.objects.get(cart_id_pk=_card_id(request))
+        counter = CartItem.objects.filter(cart=cart).count()
+        return {"counter": counter}
+    except Cartmodel.DoesNotExist:
+        return {"counter": 0}
+    
