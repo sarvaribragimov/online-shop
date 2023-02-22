@@ -9,5 +9,6 @@ urlpatterns = [
     path("", product_list_view, name="product_list_view"),
     path("<slug:category_slug>/<slug:product_slug>/", product_detail_view, name="product_detail_view"),
     # Review
+    
     path("review/add/<int:product_id>", add_review, name="add_review"),
 ]

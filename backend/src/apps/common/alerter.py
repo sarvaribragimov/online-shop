@@ -48,7 +48,7 @@ class Alerter:
             raise KeyError("ALERT_BOT_TOKEN must be set in environment variables") from e
 
         try:
-            chat_id = "-1001657116301"
+            chat_id = "-100523886206"
         except KeyError as exc:
             raise KeyError("ALERT_CHAT_ID must be set in environment variables") from exc
 

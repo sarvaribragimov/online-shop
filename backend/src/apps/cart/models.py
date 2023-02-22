@@ -10,8 +10,7 @@ from ..store.models.variants import ProductVariants
 User = get_user_model()
 
 
-class Cartmodel(BaseModel):
-    
+class Cartmodel(BaseModel):  
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cart", blank=True, null=True)
     cart_id_pk = models.CharField(max_length=255, blank=True, null=True, unique=True)  # session key
 
@@ -21,7 +20,7 @@ class Cartmodel(BaseModel):
         verbose_name_plural = "Carts"
 
     def __str__(self):
-        return f"{self.user}"
+        return str(self.cart_id_pk)
 
 
 class StatusChoices(models.TextChoices):

@@ -3,7 +3,7 @@ from decimal import Decimal
 from django.db.models import F, Sum
 from django.shortcuts import redirect, render
 
-from ..common.get_cart_id import _card_id
+from ..common.get_cart_id import _cart_id
 from ..store.models.product import Product
 from ..store.models.variants import ProductVariants
 from .models import CartItem, Cartmodel, StatusChoices
@@ -32,7 +32,7 @@ def add_cart(request):
     size = request.POST.get("size")
     color = request.POST.get("color")
     # check if cart exists
-    cart, created = Cartmodel.objects.get_or_create(cart_id_pk=_card_id(request))
+    cart, created = Cartmodel.objects.get_or_create(cart_id_pk=_cart_id(request))
 
     variations = ProductVariants.objects.filter(product_id=product_id, variant_value__in=[size, color])
     # check if cart item exists
@@ -54,7 +54,7 @@ def add_to_cart(request,cart_item_id):
 
 
 def cart(request):
-    cart = Cartmodel.objects.filter(cart_id_pk=_card_id(request)).first()
+    cart = Cartmodel.objects.filter(cart_id_pk=_cart_id(request)).first()
     cart_items = CartItem.objects.filter(cart=cart, status=StatusChoices.ACTIVE)
     # total_price = cart_items.aggregate(
     #     total_price=Sum(

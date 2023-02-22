@@ -1,5 +1,5 @@
 from .models import CartItem,Cartmodel
-from ..common.get_cart_id import _card_id
+from ..common.get_cart_id import _cart_id
 
 
 def counter(request):
@@ -9,7 +9,7 @@ def counter(request):
         if request.user.is_authenticated:
             cart = Cartmodel.objects.get(user=request.user)
         else:
-            cart = Cartmodel.objects.get(cart_id_pk=_card_id(request))
+            cart = Cartmodel.objects.get(cart_id_pk=_cart_id(request))
         counter = CartItem.objects.filter(cart=cart).count()
         return {"counter": counter}
     except Cartmodel.DoesNotExist:

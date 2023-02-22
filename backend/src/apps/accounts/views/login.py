@@ -1,7 +1,6 @@
 from django.contrib import auth, messages
 from django.shortcuts import render, redirect
 
-
 def login(request):
     if request.user.is_authenticated:
         return redirect("accounts:index_page")

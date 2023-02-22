@@ -10,7 +10,8 @@ from django.utils.http import urlsafe_base64_encode
 from ..forms.register_form import RegistrationForm
 from ...common.send_email import send_email_async
 import asyncio
-
+from ...common.get_cart_id import _cart_id
+from ...cart.models import Cartmodel
 
 @transaction.atomic
 def register(request):
@@ -44,6 +45,10 @@ def register(request):
                     )
                     html_body = strip_tags(body)
                     asyncio.run(send_email_async(subject, html_body, [email]))
+                    # TODO filter by session key
+                    cart, _= Cartmodel.objects.get_or_create(cart_id_pk=_cart_id(request))
+                    cart.user = new_form
+                    cart.save()
 
                 messages.success(request, f"Account created for {username}!")
                 return redirect("accounts:login")

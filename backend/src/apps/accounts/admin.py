@@ -41,7 +41,7 @@ admin.site.register(Account, AccountUserAdmin)
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ("thumbnail","user", "city", "state", "address")
+    list_display = ("thumbnail", "user", "city", "state", "address")
     list_filter = ("city", "state")
     list_display_links = ("user", "city", "state", "address")
 
@@ -57,12 +57,12 @@ class UserProfileAdmin(admin.ModelAdmin):
 
     thumbnail.short_description = "Profile Pic"
 
-    def set_default_city(self,request,queryset):
-        queryset.update(city="Tashkent city")
+    def set_defult_city(self, request, queryset):
+        queryset.update(city="Tashkent City", state="Tashkent")
 
-    set_default_city.short_description = "set default Tashkent city"
+    set_defult_city.short_description = "Set default Tashkent city"
 
-    actions = ["set_default_city"]
+    actions = ["set_defult_city"]
 
 
 admin.site.register(UserProfile, UserProfileAdmin)

@@ -39,6 +39,7 @@ THIRD_APPS = [
     "django.contrib.messages",
     "django.contrib.humanize",
     "django.contrib.staticfiles",
+    'import_export',
 ]
 
 LOCAL_APPS = [
@@ -121,9 +122,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "uz"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Tashkent"
 
 USE_I18N = True
 
@@ -149,8 +150,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Email configuration
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "fayzulloh00010003@gmail.com"
-EMAIL_HOST_PASSWORD = "yauwzixxyhcylioi"
+EMAIL_HOST_USER = "sarvaribragimov980@gmail.com"
+EMAIL_HOST_PASSWORD = "mkcfzzqfgyqrvlxt"
 EMAIL_USE_TLS = True
 
 
