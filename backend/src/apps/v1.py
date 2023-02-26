@@ -31,7 +31,7 @@ urlpatterns = [
             namespace="cart",
         ),
     ),
-     path(
+    path(
         "order/",
         include(
             (
@@ -41,4 +41,5 @@ urlpatterns = [
             namespace="order",
         ),
     ),
+    
 ]

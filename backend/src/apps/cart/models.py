@@ -10,7 +10,7 @@ from ..store.models.variants import ProductVariants
 User = get_user_model()
 
 
-class Cartmodel(BaseModel):  
+class Cart(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="cart", blank=True, null=True)
     cart_id_pk = models.CharField(max_length=255, blank=True, null=True, unique=True)  # session key
 
@@ -24,14 +24,14 @@ class Cartmodel(BaseModel):
 
 
 class StatusChoices(models.TextChoices):
-    # TODO Move to common
+    # TODO Move to common app
     ACTIVE = "active"
     INACTIVE = "inactive"
 
 
 # Product item in cart
 class CartItem(BaseModel):
-    cart = models.ForeignKey(Cartmodel, on_delete=models.CASCADE, null=True, related_name="items")
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="cart_items")
     variations = models.ManyToManyField(ProductVariants, blank=True)
     quantity = models.PositiveIntegerField(default=1)
@@ -43,4 +43,4 @@ class CartItem(BaseModel):
         verbose_name_plural = "Cart Items"
 
     def __str__(self):
-        return f"{self.product}"
+        return str(self.product)

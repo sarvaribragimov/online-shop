@@ -1,4 +1,4 @@
-from .models import CartItem,Cartmodel
+from .models import Cart, CartItem,StatusChoices
 from ..common.get_cart_id import _cart_id
 
 
@@ -7,11 +7,10 @@ def counter(request):
         if request.path.startswith("/admin"):
             return {}
         if request.user.is_authenticated:
-            cart = Cartmodel.objects.get(user=request.user)
+            cart = Cart.objects.get(user=request.user)
         else:
-            cart = Cartmodel.objects.get(cart_id_pk=_cart_id(request))
-        counter = CartItem.objects.filter(cart=cart).count()
+            cart = Cart.objects.get(cart_id_pk=_cart_id(request))
+        counter = CartItem.objects.filter(cart=cart,status=StatusChoices.ACTIVE).count()
         return {"counter": counter}
-    except Cartmodel.DoesNotExist:
+    except Cart.DoesNotExist:
         return {"counter": 0}
-    

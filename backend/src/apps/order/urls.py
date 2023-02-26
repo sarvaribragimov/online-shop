@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import order_create
 
-app_name = 'orders'
-
+from .views.checkout import checkout
+from .views.save_orders import save_orders
 urlpatterns = [
-    path('create/', order_create, name='order_create'),
+    path("checkout/", checkout, name="checkout"),
+    path("order-save/", save_orders, name="save_orders"),
 ]

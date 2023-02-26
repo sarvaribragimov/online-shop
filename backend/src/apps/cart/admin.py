@@ -1,8 +1,8 @@
 
 from django.contrib import admin
-from .models import Cartmodel,CartItem
+from .models import Cart,CartItem
 
-@admin.register(Cartmodel)
+@admin.register(Cart)
 class CartmodelAdmin(admin.ModelAdmin):
     list_display = ("user","cart_id_pk")
     list_filter = ("created_at",)

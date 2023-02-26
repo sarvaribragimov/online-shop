@@ -11,7 +11,7 @@ from ..forms.register_form import RegistrationForm
 from ...common.send_email import send_email_async
 import asyncio
 from ...common.get_cart_id import _cart_id
-from ...cart.models import Cartmodel
+from ...cart.models import Cart
 
 @transaction.atomic
 def register(request):
@@ -46,7 +46,7 @@ def register(request):
                     html_body = strip_tags(body)
                     asyncio.run(send_email_async(subject, html_body, [email]))
                     # TODO filter by session key
-                    cart, _= Cartmodel.objects.get_or_create(cart_id_pk=_cart_id(request))
+                    cart, _= Cart.objects.get_or_create(cart_id_pk=_cart_id(request))
                     cart.user = new_form
                     cart.save()
 
