@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% load mathfilters %}
 {% block title %}
 order
 {% endblock %}
@@ -25,7 +26,7 @@ order
                 <div class="aside"><img src="{{item.product.get_image_url}}" class="border img-sm"></div>
                 <figcaption class="info">
                     <p>{{item.product.name}} </p>
-                    <span class="text-muted">{{item.quantity}} * {{item.product.price}} = $ {{total_price}} </span>
+                    <span class="text-muted">{{item.quantity}} * {{item.product.price}} = $ {{ item.quantity|mul:item.product.price }} </span>
                 </figcaption>
             </figure>
         </div> <!-- col.// -->

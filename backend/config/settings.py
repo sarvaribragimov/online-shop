@@ -40,6 +40,7 @@ THIRD_APPS = [
     "django.contrib.humanize",
     "django.contrib.staticfiles",
     'import_export',
+    "mathfilters",
 ]
 
 LOCAL_APPS = [

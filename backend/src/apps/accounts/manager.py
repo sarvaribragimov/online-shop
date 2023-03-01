@@ -4,14 +4,14 @@ from django.contrib.auth.models import BaseUserManager
 class AccoutManager(BaseUserManager):
 
     # simple user
-    def create_user(self, email, username, firstname, password=None):
-        if not email:
-            raise ValueError("Email is required")
+    def create_user(self, phone_number, username, firstname, password=None):
+        if not phone_number:
+            raise ValueError("phone_number is required")
         if not username:
             raise ValueError("Username is required")
 
         user = self.model(
-            email=self.normalize_email(email),
+            phone_number=phone_number,
             username=username,
             firstname=firstname,
         )
@@ -21,9 +21,9 @@ class AccoutManager(BaseUserManager):
         return user
 
     # superuser
-    def create_superuser(self, email, firstname, username, password):
+    def create_superuser(self, phone_number, firstname, username, password):
         user = self.create_user(
-            email=self.normalize_email(email),
+            phone_number=phone_number,
             password=password,
             username=username,
             firstname=firstname,

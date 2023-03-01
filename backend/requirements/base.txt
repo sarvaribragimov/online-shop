@@ -19,3 +19,6 @@ psycopg2-binary==2.9.2 # https://pypi.org/project/psycopg2-binary/
 
 Pillow==9.2.0 #pip install Pillow
 django-crispy-forms==1.14.0 #pip install django-crispy-forms
+pip install django-mathfilters # https://pypi.org/project/django-mathfilters/
+
+

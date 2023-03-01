@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(verbose_name="email", max_length=60, unique=True, db_index=True)
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True, db_index=True,null=True,blank=True)
     username = models.CharField(max_length=30, unique=True)
     phone_number = models.CharField(max_length=15, unique=True, blank=True, null=True)
     firstname = models.CharField(max_length=30, blank=True, null=True)
@@ -20,13 +20,13 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    USERNAME_FIELD = "email"
+    USERNAME_FIELD = "phone_number"
     REQUIRED_FIELDS = ["username", "firstname"]
 
     objects = AccoutManager()
 
     def __str__(self):
-        return self.email
+        return str(self.username)
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
