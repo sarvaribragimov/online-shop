@@ -14,7 +14,7 @@ def activate(request, uidb64):
     try:
         User = get_user_model()
         uid = urlsafe_base64_decode(uidb64).decode()
-        user = User.objects.get(email=uid)
+        user = User.objects.get(username=uid)
         user.is_active = True
         user.save()
         messages.success(request, "Account activated successfully")

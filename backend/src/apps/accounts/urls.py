@@ -7,6 +7,7 @@ from .views import (
     logout_user,
     activate,
     reset_password,
+    verify_code,
 )
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
     # reset password
     path("forgot-password/", reset_password.forgot_password, name="forgot_password"),
     path("verify-password/<uidb64>/", reset_password.validate_password, name="validate_password"),
+    # path('verify/',verify_code.verify_code,name="verify_code"), 
 ]

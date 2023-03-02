@@ -29,6 +29,6 @@ def save_orders(request):
             # save order
             order.save()
 
-            return redirect("order:checkout")
+            return redirect("order:order_list")
     return redirect("order:checkout")
                 

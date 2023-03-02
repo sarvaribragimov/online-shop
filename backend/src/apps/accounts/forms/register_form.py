@@ -41,3 +41,7 @@ class RegistrationForm(forms.ModelForm):
         for field in self.fields:
             self.fields[field].widget.attrs["class"] = "form-control"
         self.fields["password"].widget.attrs["placeholder"] = "Password"
+
+
+class VerifyForm(forms.Form):
+    code = forms.CharField(max_length=8, required=True, help_text='Enter code')

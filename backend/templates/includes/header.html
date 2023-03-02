@@ -65,8 +65,11 @@
                             {% if user.is_authenticated %}
                                 <small class="title text-muted">Welcome {{ user.username }}!</small>
                                 <div>
-                                    <a href="{% url 'accounts:logout_user' %}">Sign out
+                                    <a href="{% url 'accounts:logout_user' %}" class="mr-3">Sign out
                                         <i class="fa fa-sign-out"></i>
+                                    </a>
+                                    <a href="{% url 'order:order_list' %}">My Order
+                                        <i class="col order-12"></i>
                                     </a>
                                 </div>
                             {% else %}

@@ -37,25 +37,24 @@ def register(request):
                     
                     sms = SendSMS()
                     code = sms.generate_one_time_sms()
-                    
-                    
-                    # Email data
-                    current_site = get_current_site(request)
-                    domain = f"http://{current_site.domain}/activate/{urlsafe_base64_encode(force_bytes(new_form))}/"
-                    subject = "Welcome to the site"
-                    message = f"Hi {firstname}, welcome to the site"
-                    body = render_to_string(
-                        "accounts/verification.html",
-                        {
-                            "subject": subject,
-                            "body": message,
-                            "domain": domain,
-                        },
-                    )
                     result = sms.send_sms(
                         phone_number,
-                        body,
+                        code,
                     )
+                    print(result)
+                    # Email data
+                    # current_site = get_current_site(request)
+                    # domain = f"http://{current_site.domain}/activate/{urlsafe_base64_encode(force_bytes(new_form))}/"
+                    # subject = "Welcome to the site"
+                    # message = f"Hi {firstname}, welcome to the site"
+                    # body = render_to_string(
+                    #     "accounts/verification.html",
+                    #     {
+                    #         "subject": subject,
+                    #         "body": message,
+                    #         "domain": domain,
+                    #     },
+                    # )
                     # html_body = strip_tags(body)
                     # asyncio.run(send_email_async(subject, html_body, [email]))
                     # TODO filter by session key
@@ -64,7 +63,7 @@ def register(request):
                     cart.save()
 
                 messages.success(request, f"Account created for {username}!")
-                return redirect("accounts:login")
+                return redirect("accounts:verify_code")
         return render(request, "accounts/register.html", {"form": form})
     except Exception as e:
         messages.error(request, f"Error: {e}")

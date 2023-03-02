@@ -178,3 +178,5 @@ logging.config.dictConfig(
         },
     }
 )
+
+LOGIN_URL = "/login/"
