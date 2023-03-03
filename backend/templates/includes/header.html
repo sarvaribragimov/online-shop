@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 <header class="section-header">
     <nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
         <div class="container">
@@ -8,9 +8,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTop4">
+
+                {% get_current_language as CURRENT_LANGUAGE %}
+                {% get_available_languages as AVAILABLE_LANGUAGES %}
+                {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+                <div class="languages">
+                    <p>{% trans "Language" %}:</p>
+                    <ul class="languages">
+                    {% for language in languages %}
+                        <li>
+                        <a href="/{{ language.code }}/"
+                            {% if language.code == CURRENT_LANGUAGE %} class="active"{% endif %}>
+                            {{ language.name_local }}
+                        </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link"> English </a>
+                       
 
                     </li>
                     <li class="nav-item dropdown">

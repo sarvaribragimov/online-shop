@@ -1,5 +1,6 @@
 
 {% extends 'base.html' %}
+{% load static %}
 {% load humanize %}
 {% block title %}
 cart
@@ -103,7 +104,7 @@ cart
 				</dl>
 				<hr>
 				<p class="text-center mb-3">
-					<img src="./images/misc/payments.png" height="26">
+					<img src="{% static './images/misc/payments.png' %}" height="26">
 				</p>
 				<a href="{% url 'order:checkout' %}" class="btn btn-primary btn-block"> Checkout </a>
 				<a href="./store.html" class="btn btn-light btn-block">Continue Shopping</a>

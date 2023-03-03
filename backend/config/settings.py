@@ -41,6 +41,8 @@ THIRD_APPS = [
     "django.contrib.staticfiles",
     'import_export',
     "mathfilters",
+    "smart_selects",
+    
 ]
 
 LOCAL_APPS = [
@@ -60,6 +62,7 @@ AUTH_USER_MODEL = "accounts.Account"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'django.middleware.locale.LocaleMiddleware', 
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -133,7 +136,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+from django.utils.translation import gettext_lazy as _
 
+LANGUAGES = (
+    ('en', _('English')),
+    ('uz', _('Uzbek')),
+)
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -180,3 +192,4 @@ logging.config.dictConfig(
 )
 
 LOGIN_URL = "/login/"
+# JQUERY_URL = True
