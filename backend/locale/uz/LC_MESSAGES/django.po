@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-03 22:14+0500\n"
+"POT-Creation-Date: 2023-03-04 21:41+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: config/settings.py:141
-msgid "English"
-msgstr ""
-
 #: config/settings.py:142
+msgid "English"
+msgstr "inglizcha"
+
+#: config/settings.py:143
 msgid "Uzbek"
-msgstr ""
+msgstr "uzbek"
 
 #: src/apps/accounts/models.py:62 src/apps/accounts/models.py:63
 msgid "UserProfile"
@@ -32,7 +32,7 @@ msgstr "foydalanuvchi profili"
 
 #: src/apps/order/models.py:19
 msgid "first_name"
-msgstr ""
+msgstr "ism"
 
 #: src/apps/order/models.py:39
 msgid "status"
@@ -42,6 +42,93 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
+#: templates/includes/header.html:16
+msgid "Language"
+msgstr "til"
+
+#: templates/includes/header.html:40
+msgid "Call us"
+msgstr "Biz bilan bog'lanish"
+
+#: templates/includes/header.html:57
+msgid "All category"
+msgstr "barcha turkumlar"
+
+#: templates/includes/header.html:66
+msgid "Store"
+msgstr "Do'kon"
+
+#: templates/includes/header.html:84
+msgid "Welcome"
+msgstr "Xush kelibsiz"
+
+#: templates/includes/header.html:86
+msgid "Sign out"
+msgstr "chiqish"
+
+#: templates/includes/header.html:89
+msgid "My Order"
+msgstr "Savatcham"
+
+#: templates/includes/header.html:94
+#, fuzzy
+#| msgid "Welcome"
+msgid "Welcome guest!"
+msgstr "Xush kelibsiz"
+
+#: templates/includes/header.html:96
+msgid "Sign in"
+msgstr "Kirish"
+
+#: templates/includes/header.html:97
+msgid "Register"
+msgstr "Ro'yxatdan o'tish"
+
+#: templates/index.html:30
+msgid "See all"
+msgstr ""
+
 #: templates/index.html:31
 msgid "Popular products"
 msgstr "Mashhur mahsulotlar"
+
+#: templates/store/store.html:18
+#, fuzzy
+#| msgid "Store"
+msgid "Our Store"
+msgstr "Do'kon"
+
+#: templates/store/store.html:36
+msgid "Categories"
+msgstr "Turkumlar"
+
+#: templates/store/store.html:55
+msgid "Sizes"
+msgstr "Razmer"
+
+#: templates/store/store.html:87
+msgid "Price range"
+msgstr "Narx oralig'i"
+
+#: templates/store/store.html:121
+msgid "Apply"
+msgstr "Murojat qiling"
+
+#: templates/store/store.html:134
+msgid "Items found"
+msgstr "Mahsulot topildi"
+
+#: templates/store/store.html:159
+msgid "View to cart"
+msgstr "Savatchani ko'rish"
+
+#: templates/store/store.html:172
+msgid "Previous"
+msgstr "orqaga"
+
+#: templates/store/store.html:183
+msgid "Next"
+msgstr "oldinga"
+
+#~ msgid "search"
+#~ msgstr "qidiruv"

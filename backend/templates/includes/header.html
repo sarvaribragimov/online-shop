@@ -37,7 +37,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
-                    <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
+                    <li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> {% trans "Call us" %} </a></li>
                 </ul> <!-- list-inline //  -->
             </div> <!-- navbar-collapse .// -->
         </div> <!-- container //  -->
@@ -54,7 +54,7 @@
                 <div class="col-lg col-sm col-md col-6 flex-grow-0">
                     <div class="category-wrap dropdown d-inline-block float-right">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bars"></i> All category
+                            <i class="fa fa-bars"></i> {% trans "All category" %}
                         </button>
                         <div class="dropdown-menu">
                             {% for category in categories %}
@@ -63,7 +63,7 @@
                         </div>
                     </div> <!-- category-wrap.// -->
                 </div> <!-- col.// -->
-                <a href="{% url 'store:product_list_view' %}" class="btn btn-outline-primary">Store</a>
+                <a href="{% url 'store:product_list_view' %}" class="btn btn-outline-primary">{% trans "Store" %}</a>
                 <div class="col-lg  col-md-6 col-sm-12 col">
                     <form mathod="get" action="{% url 'store:search' %}" class="search">
                         <div class="input-group w-100">
@@ -81,20 +81,20 @@
                     <div class="d-flex justify-content-end mb-3 mb-lg-0">
                         <div class="widget-header">
                             {% if user.is_authenticated %}
-                                <small class="title text-muted">Welcome {{ user.username }}!</small>
+                                <small class="title text-muted">{% trans "Welcome" %} {{ user.username }}!</small>
                                 <div>
-                                    <a href="{% url 'accounts:logout_user' %}" class="mr-3">Sign out
+                                    <a href="{% url 'accounts:logout_user' %}" class="mr-3">{% trans "Sign out" %}
                                         <i class="fa fa-sign-out"></i>
                                     </a>
-                                    <a href="{% url 'order:order_list' %}">My Order
+                                    <a href="{% url 'order:order_list' %}">{% trans "My Order" %}
                                         <i class="col order-12"></i>
                                     </a>
                                 </div>
                             {% else %}
-                                <small class="title text-muted">Welcome guest!</small>
+                                <small class="title text-muted">{% trans "Welcome guest!" %}</small>
                                 <div>
-                                    <a href="{% url 'accounts:login' %}">Sign in</a> <span class="dark-transp"> | </span>
-                                    <a href="{% url 'accounts:register' %}"> Register</a>
+                                    <a href="{% url 'accounts:login' %}">{% trans "Sign in" %}</a> <span class="dark-transp"> | </span>
+                                    <a href="{% url 'accounts:register' %}"> {% trans "Register" %}</a>
                                 </div>
                             {% endif %}
                         </div>
