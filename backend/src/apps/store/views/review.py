@@ -1,7 +1,7 @@
 from django.shortcuts import redirect,render
 from django.contrib import messages
 from ..forms.review_form import ReviewForm
-from ..models.review import Review
+from ...store.models.product import Review
 
 
 # add review

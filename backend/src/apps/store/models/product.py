@@ -9,7 +9,8 @@ from ...common.models import BaseModel
 from ...common.file_renamer import PathAndRename
 from django.utils.text import slugify
 from django.urls import reverse
-# from ...accounts.models import 
+
+from ...accounts.models import Account
 
 from .category import Category
 
@@ -47,11 +48,46 @@ class Product(BaseModel):
         if not self.slug:
             self.slug = slugify(self.name)
         super(Product, self).save()
-
+    
+    def averageReview(self):
+        reviews = Review.objects.filter(product=self, status=True).aggregate(average=Avg('rating'))
+        avg = 0
+        if reviews['average'] is not None:
+            avg = float(reviews['average'])
+        return avg
+    
     @property
     def average_rating(self):
         reviews = self.reviews.filter(status=True).aggregate(Avg("rating"))
         return float(reviews["rating__avg"]) if reviews["rating__avg"] else 0
+
+def validate_desc(value):
+    # TODO move to forms.py
+    # list of bad words
+    bad_words = ["yomon","bad"]
+    # check if bad words in review description
+    if any(word in value for word in bad_words):
+        raise ValidationError("Bad words in review description")
+
+
+
+
+class Review(BaseModel):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="reviews")
+    desc = models.TextField(validators=[validate_desc], help_text="Review haqida izoh")
+    status = models.BooleanField(default=True)
+    ip = models.GenericIPAddressField(blank=True, null=True)
+    rating = models.FloatField(null=True, blank=True)
+    # reply = models.ForeignKey("self", on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user)
+
+    class Meta:
+        verbose_name = "Review"
+        verbose_name_plural = "Reviews"
+        ordering = ["-created_at"]
 
 
 class ProductImage(BaseModel):

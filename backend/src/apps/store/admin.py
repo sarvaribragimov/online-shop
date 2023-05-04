@@ -5,7 +5,7 @@ from import_export.admin import ImportExportModelAdmin
 
 from .models.category import Category
 from .models.product import Product, ProductImage
-from .models.review import Review
+from ..store.models.product import Review
 from .models.variants import ProductVariants
 
 # Register your models here.

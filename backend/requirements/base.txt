@@ -19,7 +19,7 @@ psycopg2-binary==2.9.2 # https://pypi.org/project/psycopg2-binary/
 
 Pillow==9.2.0 #pip install Pillow
 django-crispy-forms==1.14.0 #pip install django-crispy-forms
-pip install django-mathfilters # https://pypi.org/project/django-mathfilters/
-pip install django twilio python-dotenv
+# pip install django-mathfilters # https://pypi.org/project/django-mathfilters/
+# pip install django twilio python-dotenv
 
-django-debug-toolbar-3.8.1 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+# django-debug-toolbar-3.8.1 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
